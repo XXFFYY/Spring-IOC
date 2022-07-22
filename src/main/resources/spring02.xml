@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+        构造器实例化
+            默认使用空构造实例化Bean对象。如果Bean对象未提供空构造，则实例化失败
+    -->
+   <!-- <bean id="accountService" class="com.Xie.service.AccountService"/>-->
+    <!--
+        静态工厂实例化
+            定义静态工厂类，类中定义静态方法，方法返回实例化的bean对象
+
+            id:需要被实例化的bean对象id
+            class:静态工厂类的类路径
+            factory-method:静态工厂类中对应的静态方法
+    -->
+    <!--<bean id="accountService" class="com.Xie.factory.StaticFactory" factory-method="creatService"/>-->
+
+    <!--
+        实例化工厂实例化
+            定义工厂类，类中定义普通方法，方法返回实例化的bean对象
+
+            1.先实例化工厂类
+            2.定义bean对象的bean标签，设置id属性值，指定对应的工厂类及类中对应的方法
+
+            factory-bean:对应工厂类的bean标签的id属性值
+            factory-method：工厂类中的方法
+    -->
+    <bean id="inatanceFactory" class="com.Xie.factory.InstanceFactory"/>
+    <bean id="accountService" factory-bean="inatanceFactory" factory-method="creatService"/>
+
+
+
+
+</beans>

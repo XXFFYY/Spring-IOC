@@ -13,11 +13,12 @@ spring05 学习
 > BeanFactory factory = new ClassPathXmlApplicationContext("spring.xml", "beans.xml, ...");
 
 > //方法二：新建一个总配置文件，直接导入总配置文件
+> 
 > //总配置文件：
 > 
->  import resource="spring.xml"
+>  import resource="spring.xml"(<.../>)
 > 
->  import resource="...."
+>  import resource="...."(<.../>)
 > 
 > //导入：
 > 

@@ -10,11 +10,11 @@ spring05 学习
 >`BeanFactory factory = new FileSystemXmlApplicationContext("C:\\JavaTest\\...");`
 -----------------------------
 + **多个配置文件加载(相对路径)**
->//*方法一：用 ClassPathXmlApplicationContext() 传入多个参数*
+>方法一：用 ClassPathXmlApplicationContext() 传入多个参数
 > 
 >`BeanFactory factory = new ClassPathXmlApplicationContext("spring.xml", "beans.xml, ...");`
 
-> //*方法二：新建一个总配置文件，直接导入总配置文件*
+> 方法二：新建一个总配置文件，直接导入总配置文件
 > 
 > 总配置文件：
 > 

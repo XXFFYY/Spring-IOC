@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="typeDao" class="com.Xie.dao.TypeDao" />
+    <!--
+            set方法注入
+                通过property属性实现set方法注入
+                name:属性字段名称
+                ref:对应bean标签的id属性值
+                value:具体的值
+        -->
+    <!--<bean id="typeService" class="com.Xie.service.TypeService" >
+
+        <property name="typeDao" ref="typeDao"/>
+        <property name="host" value="localhost"/>
+        <property name="port" value="8080"/>
+    </bean>-->
+
+    <!--
+        构造器注入
+            通过 constructor-arg标签实现构造器注入
+            name:属性字段的名称
+            ref:对应bean标签的id属性值
+            value：具体的值
+            index：参数的下标
+    -->
+    <bean name="typeService" class="com.Xie.service.TypeService">
+        <constructor-arg name="typeDao" ref="typeDao"/>
+
+    </bean>
+
+
+
+
+
+
+</beans>

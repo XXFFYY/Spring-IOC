@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
-       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-        https://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+       https://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd">
 
     <bean id="typeDao" class="com.Xie.dao.TypeDao" />
     <!--
@@ -33,9 +35,14 @@
 
     </bean>
 
+    <!--开启自动化注入（注入）-->
+    <context:annotation-config/>
 
+    <!-- 配置bean对象 -->
+    <bean id="userService" class="com.Xie.service.UserService"></bean>
+    <bean id="userDao" class="com.Xie.dao.UserDao"></bean>
 
-
-
-
+    <!-- 接口的实现类 -->
+    <bean id="userDaoImpl01" class="com.Xie.dao.UserDaoImpl01" ></bean>
+    <bean id="userDaoImpl02" class="com.Xie.dao.UserDaoImpl02" ></bean>
 </beans>

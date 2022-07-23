@@ -1,5 +1,5 @@
-# spring_study
-spring05 学习
+# Spring IOC
+Spring IOC 学习
 
 ## 2022/7/22 
 ### 1. SpringIOC加载配置文件

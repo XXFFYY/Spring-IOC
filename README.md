@@ -190,7 +190,7 @@ spring05 学习
 
 ##### 3.2.1 准备环境： 
 
- 	1. 修改配置文件：
+1.修改配置文件：
 
 ```xml
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -202,7 +202,7 @@ spring05 学习
        https://www.springframework.org/schema/context/spring-context.xsd">
 ```
 
- 	2.开启自动化注入：
+ 2.开启自动化注入：
 
 ```xml
 <!--开启自动化注入（注入）-->
@@ -213,7 +213,7 @@ spring05 学习
 <bean id="userDao" class="com.Xie.dao.UserDao"></bean>
 ```
 
-​	3.给注入的bean添加注解
+3.给注入的bean添加注解
 
 -----------------------------------
 

@@ -233,7 +233,17 @@ Spring IOC 学习
 #### 3.2.3 @Autowired注解
 
 + 默认通过类型（Class类型）查找bean对象，与属性字段的名称无关
+
 + 属性可以提供set方法，也可以不提供set方法
+
 + 注解可以声明在属性级别或set方法级别
+
 + 可以添加@Qualifier结合使用，通过value属性值查找bean对象（value属性值必须要设置，且值要与bean标签的id属性值对应）
+
+  ```java
+  @Autowired
+  @Qualifier(value = "...")//value与bean标签的id属性值对应
+  private AccountDao accountDao;
+  ...
+  ```
 

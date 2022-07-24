@@ -20,9 +20,13 @@ public class Starter03 {
         TypeService typeService = (TypeService) factory.getBean("typeService");
         typeService.test();*/
 
-        ApplicationContext ac = new ClassPathXmlApplicationContext("spring03.xml");
+        /*ApplicationContext ac = new ClassPathXmlApplicationContext("spring03.xml");
 
         UserService userService = (UserService) ac.getBean("userService");
-        userService.test();
+        userService.test();*/
+
+        ApplicationContext ac = new ClassPathXmlApplicationContext("spring.xml");
+        AccountService accountService = (AccountService) ac.getBean("accountService");
+        accountService.test();
     }
 }

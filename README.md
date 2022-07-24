@@ -247,3 +247,68 @@ Spring IOC 学习
   ...
   ```
 
+-------------
+
+## 4. Spring IOC扫描器
+
+​		自动扫描bean对象，进行统一管理，简化开发配置，提高开发效率
+
+### 7.1 Spring IOC扫描器的配置
+
+-------------------
+
+1.设置自动化扫描范围
+
+```xml
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       https://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 设置自动化扫描的范围 -->
+    <context:component-scan base-package="com.Xie"/>
+```
+
+2.在需要被实例化的JavaBean的类上添加指定的注解(注解声明在类级别) (Bean对象的id属性默认是类的首字母小写)
+
+```java
+@Service
+public class TypeService {
+	...
+	}
+```
+
+3.注解类型：
+
+​	Dao层：
+
+​		@Repository
+
+​	Service层：
+
+​		@Service
+
+​	Controller层：
+
+​		@Controller
+
+​	任意类：
+
+​		@Component
+
+<u>**注：开发过程中建议按照规则声明注解。**</u>
+
+-----
+
+### 7.2 Spring 模拟用户登录流程
+
+-----
+
+#### 7.2.1 Dao层(查询用户记录)
+
+1.定义JavaBean User.Java
+
+0

@@ -1,6 +1,10 @@
 package com.Xie.service;
 
 import com.Xie.dao.TypeDao;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * @Description: set方法注入
@@ -8,8 +12,10 @@ import com.Xie.dao.TypeDao;
  * @eamil: 32096231@qq.com
  * @date:2022/7/22 15:55
  */
+@Service
 public class TypeService {
     //bean对象
+    @Resource
     private TypeDao typeDao;
     /*
         set方法注入
@@ -39,9 +45,6 @@ public class TypeService {
      *  通过构造器的形参设置属性字段的值
      */
 
-    public TypeService(TypeDao typeDao) {
-        this.typeDao = typeDao;
-    }
     public void test(){
         System.out.println("TypeService...");
         typeDao.test();

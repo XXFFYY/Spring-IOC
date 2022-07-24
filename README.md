@@ -253,7 +253,7 @@ Spring IOC 学习
 
 ​		自动扫描bean对象，进行统一管理，简化开发配置，提高开发效率
 
-### 7.1 Spring IOC扫描器的配置
+### 4.1 Spring IOC扫描器的配置
 
 -------------------
 
@@ -303,12 +303,11 @@ public class TypeService {
 
 -----
 
-### 7.2 Spring 模拟用户登录流程
+### 4.2 Spring 模拟用户登录流程
 
 -----
 
-#### 7.2.1 Dao层(查询用户记录)
+#### 4.2.1 Dao层(查询用户记录)
 
 1.定义JavaBean User.Java
 
-0

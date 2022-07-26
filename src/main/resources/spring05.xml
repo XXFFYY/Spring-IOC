@@ -29,5 +29,28 @@
     <!--单例作用域-->
     <!--<bean id="roleService" class="com.Xie.service.RoleService" lazy-init="true"></bean>-->
     <!--原型作用域-->
-    <bean id="roleService" class="com.Xie.service.RoleService" scope="prototype"></bean>
+    <!--<bean id="roleService" class="com.Xie.service.RoleService" scope="prototype"></bean>-->
+
+
+    <!--
+        Bean的生命周期
+            Bean的定义
+                在配置文件中定义
+                通过bean标签定义对应的bean对象
+            Bean的初始化
+                IOC容器启动时会自动实例化bean对象
+                1.在配置文档中通过指定init-method属性来完成
+                2.实现接口
+            Bean的使用
+            Bean的销毁
+                步骤一：通过AbstractApplicationContext对象，调用其close方法实现bean的销毁过程
+                步骤二：在配置文件中指定对应销毁使用的方法 destroy-method
+    -->
+    <!--Bean对象初始化：init-method-->
+    <!--<bean id="roleService" class="com.Xie.service.RoleService" init-method="init"></bean>-->
+    <!--Bean对象初始化：org.springframework.beans.factory.InitializingBean接口-->
+    <!--<bean id="roleService" class="com.Xie.service.RoleService"></bean>-->
+
+    <!--bean的销毁-->
+    <bean id="roleService" class="com.Xie.service.RoleService" destroy-method="destroy"></bean>
 </beans>

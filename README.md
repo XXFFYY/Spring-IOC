@@ -543,3 +543,84 @@ public class UserTest {
 ​	**3.globalSession作用域**
 
 ​		类似于session作用域，其用于Portlet(基于Java的web组件，由Portlet容器管理，并由容器处理请求，生产动态内容)环境的web应用。如果在非Portlet环境将视为session作用域
+
+-------
+
+### 5.2 Bean的生命周期
+
+​	**在Spring中，Bean的生命周期包括Bean的定义、初始化、使用和销毁4个阶段**
+
+---------
+
+#### 5.2.1Bean的定义
+
+​	通过配置文档定义Bean
+
+​	同一个配置文档中，可以定义多个Bean
+
+------------
+
+#### 5.2.2 Bean的初始化
+
+​	默认在IOC容器加载时，实例化对象。
+
+Spring bean 初始化有两种方式：
+
+​	**方式一**：在配置文档中通过指定init-method属性来完成
+
+```java
+public void init(){
+    System.out.println("RoleService被初始化了...");
+}
+```
+
+```xml
+<!--Bean对象初始化：init-method-->
+<bean id="roleService" class="com.Xie.service.RoleService" init-method="init"></bean>
+```
+
+**方式二：**实现org.springframework.beans.factory.InitializingBean接口。
+
+```Java
+public class RoleService implements InitializingBean {
+    /*
+        查看初始化的方法
+     */
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        System.out.println("RoleService init afterPropertiesSet...");
+    }
+
+}
+```
+
+```xml
+<!--Bean对象初始化：org.springframework.beans.factory.InitializingBean接口-->
+<bean id="roleService" class="com.Xie.service.RoleService"></bean>
+```
+
+-----------
+
+#### 5.2.3 Bean的使用
+
+​	**方法一：**使用BeanFactory
+
+​	**方法二：**使用ApplicationContext
+
+-----
+
+#### 5.2.4 Bean的销毁
+
+​	**步骤一：**实现销毁方式（Spring容器会维护bean对象的管理，可以指定bean对象的销毁所要执行的方法）
+
+```xml
+<bean id="roleService" class="com.Xie.service.RoleService" destroy-method="destroy"></bean>
+```
+
+​	**步骤二：**通过AbstractApplicationContext对象，调用其close方法实现bean的销毁过程
+
+```java
+AbstractApplicationContext ctx = new ClassPathXmlApplicationContext("spring05.xml");
+ctx.close();
+```
+

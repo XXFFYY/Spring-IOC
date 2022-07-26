@@ -285,19 +285,19 @@ public class TypeService {
 
 ​	Dao层：
 
-​		@Repository
+​			@Repository
 
 ​	Service层：
 
-​		@Service
+​			@Service
 
 ​	Controller层：
 
-​		@Controller
+​			@Controller
 
 ​	任意类：
 
-​		@Component
+​			@Component
 
 <u>**注：开发过程中建议按照规则声明注解。**</u>
 
@@ -311,3 +311,189 @@ public class TypeService {
 
 1.定义JavaBean User.Java
 
+```java
+public class User {
+    
+    /**
+    * User用户实体类
+    */
+    private String userName;//用户名称
+    private String userPwd;//用户密码
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserPwd() {
+        return userPwd;
+    }
+
+    public void setUserPwd(String userPwd) {
+        this.userPwd = userPwd;
+    }
+}
+```
+
+2.编写Dao层 UserDao.java
+
+```java
+@Repository
+public class UserDao {
+
+    //定义登陆的账号密码
+    private final String USERNAME = "admin";
+    private final String USERPWD = "admin";
+
+
+    /**
+     * 通过用户名查询用户对象
+     *      如果存在，返回对应的用户对象；如果不存在则返回null
+     * @param userName
+     * @return
+     */
+    public User queryUserByUserName(String userName){
+        User user = null;
+        //判断用户名是否存在
+        if(!USERNAME.equals(userName)){
+            return null;
+        }
+
+        //给user对象赋值
+        user = new User();
+        user.setUserName(userName);
+        user.setUserPwd(USERPWD);
+
+        return user;
+    }
+}
+```
+
+---------------
+
+#### 4.2.2 Service层（业务逻辑处理）
+
+1.定义业务处理返回消息模型	MessageModel.java
+
+```java
+public class MessageModel {
+    private int resultCode = 1;// 状态码 (1=成功 0=失败)
+    private String resultMsg;// 提示信息
+
+    public int getResultCode() {
+        return resultCode;
+    }
+
+    public void setResultCode(int resultCode) {
+        this.resultCode = resultCode;
+    }
+
+    public String getResultMsg() {
+        return resultMsg;
+    }
+
+    public void setResultMsg(String resultMsg) {
+        this.resultMsg = resultMsg;
+    }
+}
+```
+
+2.编写Service层 UserService.java
+
+```java
+@Service
+public class UserService {
+
+    @Resource
+    private UserDao userDao;
+
+    /**
+     * 验证是否登录成功
+     *  1.参数的非空校验
+     *  2.通过用户名查询用户对象（调用Dao层的查询方法）
+     *  3.判断密码是否正确
+     * @param uname
+     * @param upwd
+     * @return
+     */
+    public MessageModel checkUserLogin(String uname, String upwd){
+        //返回消息模型
+        MessageModel messageModel = new MessageModel();
+
+        //1.参数的非空校验
+        if(StringUtil.isEmpty(uname) || StringUtil.isEmpty(upwd)){
+            //用户名和密码不能为空
+            messageModel.setResultCode(0);
+            messageModel.setResultMsg("用户名和密码不能为空");
+            return messageModel;
+        }
+
+        //2.通过用户名查询用户对象(调用Dao层的查询方法)
+        User user = userDao.queryUserByUserName(uname);
+
+        //判断用户对象是否为空
+        if(user == null){
+            messageModel.setResultCode(0);
+            messageModel.setResultMsg("用户名不存在！");
+            return messageModel;
+        }
+
+        //3.判断密码是否正确
+        if(!upwd.equals(user.getUserPwd())){
+            messageModel.setResultCode(0);
+            messageModel.setResultMsg("用户密码不正确！");
+            return messageModel;
+        }
+
+        //登陆成功
+        messageModel.setResultMsg("登陆成功！");
+
+        return messageModel;
+    }
+}
+```
+
+---------------------
+
+#### 4.2.3	Controller层（接受请求）
+
+1.编写Controller层	UserController.java
+
+```java
+@Controller
+public class UserController {
+    @Resource
+    private UserService userService;
+
+    public MessageModel userLogin(String uname, String upwd){
+
+        MessageModel messageModel = userService.checkUserLogin(uname, upwd);
+
+        return messageModel;
+    }
+}
+```
+
+-----------------
+
+#### 4.2.4	通过Junit测试
+
+```java
+public class UserTest {
+
+    @Test
+    public void test() {
+        //获取Spring的上下文环境
+        BeanFactory beanFactory = new ClassPathXmlApplicationContext("spring.xml");
+        //得到实例化的userController对象
+        UserController userController = (UserController) beanFactory.getBean("userController");
+        //传入参数调用UserController的方法，返回封装类
+        MessageModel messageModel = userController.userLogin("admin", "123");
+        
+        System.out.println("状态码" + messageModel.getResultCode() + ",提示信息:" + messageModel.getResultMsg());
+    }
+}
+```

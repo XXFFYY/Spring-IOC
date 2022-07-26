@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       https://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--
+        Bean的作用域
+            scope属性：
+                singleton（单例）作用域（默认）：
+                    SpringIOC容器在启动时，会将所有在singleton作用域中的bean对象实例化，并设置到单例缓存池中
+
+                    lazy-init属性（懒加载）
+                        如果设置为true，表示懒加载，容器启动时，不会实例化bean对象，在程序调用时才会实例化
+                        如果设置为false（默认），表示不懒加载，容器启动则实例化bean对象
+                    lazy-init属性设置为false的优点：
+                        1.可以提取发现潜在的配置问题
+                        2.bean对象在启动时就会设置在单例缓存池中，使用时不需要再去实例化bean对象，提高程序运行效率
+                    什么对象适合作为单例对象（交给IOC容器实例化）？
+                        无状态的对象（不存在会改变当前对象状态的成员变量）
+                        适用对象：Controller层，Service层，Dao层
+                 prototype（原型）作用域：
+                    Spring IOC容器在启动时，不会将bean对象实例化设置到单例缓存池中,每次实例化时都会新创建一个实例
+
+    -->
+    <!--单例作用域-->
+    <!--<bean id="roleService" class="com.Xie.service.RoleService" lazy-init="true"></bean>-->
+    <!--原型作用域-->
+    <bean id="roleService" class="com.Xie.service.RoleService" scope="prototype"></bean>
+</beans>
